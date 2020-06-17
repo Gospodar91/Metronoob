@@ -3,20 +3,23 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  let audio = new Audio("/beep.wav");
+
   let userBPM; // Пользовательское значение метронома
-  const [startTimeState, setStateInterval] = useState('');
-  const bpm = 5000; // убрать когда будет UI
+  const [startTimeState, setStateInterval] = useState("");
+  const bpm = 1000; // убрать когда будет UI
   function saveTimer() {
     let startTime = Date.now();
-    setStateInterval(startTime);// выкинули наверх в глобальный стейт
+    setStateInterval(startTime); // выкинули наверх в глобальный стейт
     const beep = () => {
+      audio.play();
       console.log("Beeeep");
-          startTime+=bpm
+      startTime += bpm;
       setStateInterval(startTime);
       // console.log('startTimeState------------------------>', startTimeState)
     };
-   const myTimerSetInterval = () => setInterval(beep, bpm);
- 
+    const myTimerSetInterval = () => setInterval(beep, bpm);
+
     return myTimerSetInterval();
     // var t = d.toLocaleTimeString();
   }
@@ -30,11 +33,11 @@ function App() {
     // const faultPlus = startTimeState + bpm + bpm/64;   Погрешность плюс одна шестьдесятчетвертая
 
     const bpm2 = startTimeState + bpm;
-    if (hitTime > startTimeState && hitTime < bpm2 - 2000) {
+    if (hitTime > startTimeState && hitTime < bpm2 - 200) {
       console.log("SLOW NUB");
     }
-    if (hitTime >= bpm2 - 2000 && hitTime < bpm2) {
-      console.log("GOOD");
+    if (hitTime >= bpm2 - 200 && hitTime <= bpm2) {
+      console.log("GOD");
     }
   }
 
